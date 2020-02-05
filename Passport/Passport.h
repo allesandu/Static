@@ -7,9 +7,13 @@ class Passport{
         int id;
         int number;
         std::string series;
+        
+        // void nextSeries(std::string str);
+        std::string nextSeries(std::string str);
     
     public:
-        Passport(const std::string& ser = "AA");
+        Passport();
+        // Passport(const std::string& ser);// think over and write accordind to task
         ~Passport();
         
         Passport(const Passport& passport); // copy constructor
@@ -21,6 +25,9 @@ class Passport{
         const char& lastSymbol() const;
         
     static int globID;
+    static std::string globSeries;
+    static const int startID = 999999;//100000;
+    static const int lastID = 999999;
 };
 
 std::ostream& operator<<(std::ostream& out, const Passport& pas);
