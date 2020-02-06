@@ -88,24 +88,29 @@ int main() {
     // std::cout << "2nd_Symbol = " << ser[1] << " isChar = " << isLetter(ser[1]) << std::endl;
     // std::cout << "============================" << std::endl;
     
-    std::cout << "Start_:" << std::endl;
+    // std::cout << "Start_:" << std::endl;
+    
     Passport* p1 = new Passport();
     Passport* p2 = new Passport();
     Passport* p3 = new Passport();
+    Passport* p4 = new Passport("SSA");
+    Passport* p5 = new Passport();//"Zz", 999999);
+    Passport* p6 = new Passport();
     // *p3 = *p1;// dont work correctly
     
     std::cout << *p1 << std::endl;
     std::cout << *p2 << std::endl;
     std::cout << *p3 << std::endl;
+    std::cout << *p4 << std::endl;
+    std::cout << *p5 << std::endl;
+    std::cout << *p6 << std::endl;
     
-    // int diff = 'a' - 'A';
-    // std::cout << "A-a: = " << diff << " position" << std::endl;
-    
-    // std::string newSer = "A";
-    // newSer.push_back('B');
-    // newSer.push_back(char(97));
-    // std::cout << "NEw ser = " << newSer;
-    // std::cout << " with lastSymb = " << newSer.at(newSer.length()-1) << std::endl;
+    delete p1;
+    delete p2;
+    delete p3;
+    delete p4;
+    delete p5;
+    delete p6;
     
     return 0;
 }

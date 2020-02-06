@@ -1,33 +1,37 @@
 #ifndef PASSPORT_H
 #define PASSPORT_H
 #include <iostream>
+#include "Date.h"
+
+class CheckException{};
 
 class Passport{
     private:
-        int id;
-        int number;
         std::string series;
+        int number;
+        Date* date;
         
-        // void nextSeries(std::string str);
         std::string nextSeries(std::string str);
     
     public:
         Passport();
-        // Passport(const std::string& ser);// think over and write accordind to task
+        Passport(const std::string& ser, int num = startNumber);// think over and write accordind to task
         ~Passport();
         
-        Passport(const Passport& passport); // copy constructor
-        Passport& operator=(const Passport& passport);
+        Passport(const Passport& passport);// copy constructor - maybe dont need
+        Passport& operator=(const Passport& passport);// - maybe dont need
         
         int getNumber() const;
         const std::string& getSeries() const;
+        Date* getDate() const;
         
         const char& lastSymbol() const;
         
     static int globID;
     static std::string globSeries;
-    static const int startID = 999999;//100000;
-    static const int lastID = 999999;
+    
+    static const int startNumber = 100000;
+    static const int lastNumber = 999999;
 };
 
 std::ostream& operator<<(std::ostream& out, const Passport& pas);
