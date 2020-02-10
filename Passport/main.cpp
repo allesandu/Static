@@ -89,13 +89,17 @@ int main() {
     // std::cout << "============================" << std::endl;
     
     // std::cout << "Start_:" << std::endl;
-    
+    try {
     Passport* p1 = new Passport();
     Passport* p2 = new Passport();
-    Passport* p3 = new Passport();
-    Passport* p4 = new Passport("SSA");
+    Passport* p3 = new Passport();//"az", 599999);
+    Passport* p4 = new Passport();
     Passport* p5 = new Passport();//"Zz", 999999);
     Passport* p6 = new Passport();
+    Passport* p7 = new Passport("za", 999999);
+    // Passport* p7 = new Passport();
+    Passport* p8 = new Passport();
+    Passport* p9 = new Passport();
     // *p3 = *p1;// dont work correctly
     
     std::cout << *p1 << std::endl;
@@ -104,6 +108,9 @@ int main() {
     std::cout << *p4 << std::endl;
     std::cout << *p5 << std::endl;
     std::cout << *p6 << std::endl;
+    std::cout << *p7 << std::endl;
+    std::cout << *p8 << std::endl;
+    std::cout << *p9 << std::endl;
     
     delete p1;
     delete p2;
@@ -111,6 +118,12 @@ int main() {
     delete p4;
     delete p5;
     delete p6;
+    delete p7;
+    delete p8;
+    delete p9;
+    }  catch (CheckException e) {
+        std::cout << e.text << std::endl;
+    }
     
     return 0;
 }

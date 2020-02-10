@@ -1,9 +1,11 @@
 #include "Passport.h"
 #include <iostream>
 
-// void Passport::nextSeries(std::string str) {
+bool Passport::isLetter(const char& ch) {
+    return (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z');
+}
+
 std::string Passport::nextSeries(std::string str) {
-// std::string Passport::nextSeries(char str[]) {
     int step = 1;
     std::string newSer = "zz";
     char first = str[0];
@@ -30,12 +32,32 @@ std::string Passport::nextSeries(std::string str) {
     str[0] = char(first);
     str[1] = char(second);
     
-    // std::cout << "done-str-" << str[0] << str[1] <<std::endl;
     return str;
 }
 
+void Passport::numberValidate(int number) {
+    if ( number > lastNumber || number < startNumber) {
+        throw CheckException("Wrong Series! Series number must contain six digits");
+    }
+}
+
+void Passport::letterValidate(const std::string& serStr) {
+    if ( serStr.length() != 2 ) {
+        throw CheckException("Wrong Series! Enter only TWO Letters!");
+    }
+    if ( !isLetter(serStr[0]) || !isLetter(serStr[1])) {
+        throw CheckException("Wrong Series! Series must contain two letters!");
+    }
+}
+
+void Passport::isLast() {
+    if ( globID == lastNumber && globSeries =="zz" ) {
+        throw CheckException("Error! The last Passport have been created!");
+    }
+}
+
 Passport::Passport() {
-    // globID += 1; // removed to the end
+    isLast();
     
     if ( globID > lastNumber ) {
         globID = startNumber;
@@ -43,19 +65,19 @@ Passport::Passport() {
     }
     this->number = globID;
     this->series = globSeries;
-    this->date = new Date();
+    this->date = new Date(10, 2, 2020);
     
     globID += 1;
 }
 
 Passport::Passport(const std::string& ser, int num) {
-    // if ( ser.length() > 2 ) {
-    //     throw CheckException();
-    // }
+    letterValidate(ser);
+    numberValidate(num);
     
     globID = num;
-    
     globSeries = ser;
+    isLast();
+    
     if ( globID > lastNumber ) {
         globID = startNumber;
         globSeries = nextSeries(globSeries);
@@ -63,22 +85,23 @@ Passport::Passport(const std::string& ser, int num) {
     
     this->number = globID;
     this->series = globSeries;
-    this->date = new Date(14, 5, 2009);
+    this->date = new Date(10, 2, 2020);
     
     globID += 1;
 }
 
-Passport::~Passport() {}
+Passport::~Passport() {
+    delete this->date;
+}
 
-Passport::Passport(const Passport& passport) {// - maybe dont need
-    // globID += 1;// removed to the end
+Passport::Passport(const Passport& passport) {
     this->number = globID;
     this->series = passport.series;
     
     globID += 1;
 }
 
-Passport& Passport::operator=(const Passport& passport) { // dont work correctly!// - maybe dont need
+Passport& Passport::operator=(const Passport& passport) {
     globID += 1;
     this->number = globID;
     this->series = passport.series;
@@ -98,20 +121,11 @@ Date* Passport::getDate() const {
     return this->date;
 }
 
-const char& Passport::lastSymbol() const {
-    int last = this->series.length() - 1;
-    
-    return this->series.at(last);
-}
-
-int Passport::globID = startNumber; // must be startNumber = 0  - dont forget to change
-std::string Passport::globSeries = "Za";
+int Passport::globID = startNumber;
+std::string Passport::globSeries = "zz";
 
 std::ostream& operator<<(std::ostream& out, const Passport& pas) {
-    out << "Pass: " << pas.getSeries() << "_" << pas.getNumber();
-    // out << " { last = " << pas.lastSymbol() << " ASCII = " << int(pas.lastSymbol()) << " }";
-    out << " { birthday date : " << *pas.getDate() << " }";
-    // out << std::endl;
-    out << " series size=" << pas.getSeries().length();// << std::endl;
+    out << "Passport = " << pas.getSeries() << "_" << pas.getNumber();
+    out << "  Person's Birthday = " << *pas.getDate();
     return out;
 }

@@ -3,7 +3,11 @@
 #include <iostream>
 #include "Date.h"
 
-class CheckException{};
+class CheckException{
+    public:
+        std::string text;
+        CheckException(const std::string& text) : text(text) {}
+};
 
 class Passport{
     private:
@@ -11,21 +15,23 @@ class Passport{
         int number;
         Date* date;
         
+        bool isLetter(const char& ch);
+        void numberValidate(int serNumber);
+        void letterValidate(const std::string& serStr);
+        void isLast();
         std::string nextSeries(std::string str);
     
     public:
         Passport();
-        Passport(const std::string& ser, int num = startNumber);// think over and write accordind to task
+        Passport(const std::string& ser, int num = startNumber);
         ~Passport();
         
-        Passport(const Passport& passport);// copy constructor - maybe dont need
-        Passport& operator=(const Passport& passport);// - maybe dont need
+        Passport(const Passport& passport);
+        Passport& operator=(const Passport& passport);
         
         int getNumber() const;
         const std::string& getSeries() const;
         Date* getDate() const;
-        
-        const char& lastSymbol() const;
         
     static int globID;
     static std::string globSeries;
