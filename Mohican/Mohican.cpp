@@ -4,7 +4,6 @@ Mohican::Mohican(const std::string& name) {
         lastID += 1;
         
         this->prev = lastMohican;
-        this->current = this;
         if ( this->prev != NULL ) {
             this->prev->setNext(this);
         }
@@ -14,7 +13,20 @@ Mohican::Mohican(const std::string& name) {
         this->mohicanID = lastID;
 }
 
-Mohican::~Mohican() {};
+Mohican::~Mohican() {
+    if ( this->next == NULL ) {
+        this->prev->setNext(NULL);
+        lastMohican = this->prev;
+        delete this->next;
+    } else {
+        if ( this->prev != NULL ) {
+            this->prev->setNext(this->next);
+        }
+        this->next->setPrev(this->prev);
+    }
+    
+    lastID -= 1;
+};
 
 const std::string& Mohican::getName() const {
     return this->mohicanName;
@@ -26,6 +38,10 @@ int Mohican::getID() const {
 
 void Mohican::setNext(Mohican* nextMohican) {
     this->next = nextMohican;
+}
+
+void Mohican::setPrev(Mohican* prevMohican) {
+    this->prev = prevMohican;
 }
 
 Mohican* Mohican::getPrev() {
@@ -46,10 +62,4 @@ Mohican* Mohican::lastMohican = NULL;
 
 Mohican* Mohican::getLastMohican() {
     return Mohican::lastMohican;
-}
-
-void Mohican::initCheck() {
-    if ( lastMohican == NULL ) {
-        std::cout << "No person yet" << std::endl;
-    }
 }

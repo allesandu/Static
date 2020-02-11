@@ -6,15 +6,8 @@ class Mohican {
     private:
         std::string mohicanName;
         int mohicanID;
-        Mohican* prev = nullptr;
-        Mohican* current = NULL;
+        Mohican* prev = NULL;
         Mohican* next = NULL;
-        
-        // void initCheck() {
-        //     if ( Mohican::prev == NULL ) {
-        //         std::cout "No person yet" << std::endl;
-        //     }
-        // }
     
     public:
         Mohican(const std::string& name = "noBody");
@@ -24,6 +17,7 @@ class Mohican {
         int getID() const;
         
         void setNext(Mohican* nextMohican);
+        void setPrev(Mohican* prevMohican);
         
         Mohican* getPrev();
         Mohican* getNext();
@@ -31,7 +25,6 @@ class Mohican {
         static int lastID;
         static Mohican* lastMohican;
         static Mohican* getLastMohican();
-        static void initCheck();
 };
 
 std::ostream& operator<<(std::ostream& out, const Mohican& mohican);
