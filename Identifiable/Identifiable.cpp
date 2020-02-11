@@ -2,11 +2,13 @@
 #include "Identifiable.h"
 
 
-Identifiable::Identifiable(const std::string name) {
+Identifiable::Identifiable(const std::string& name) {
     lastID += 1;
     this->objID = lastID;
     this->objName = name;
 }
+
+Identifiable::~Identifiable() {};
 
 Identifiable::Identifiable(const Identifiable& copy) {
     lastID += 1;

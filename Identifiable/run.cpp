@@ -2,7 +2,7 @@
 #include "Identifiable.h"
 
 int main() {
-    std::cout << "2 shift is = " << i << std::endl;
+    // std::cout << "2 shift is = " << i << std::endl;
     
     std::cout << "Class # = " << Identifiable::lastID << std::endl;
     std::cout << "______________________________________________" << std::endl;
@@ -11,7 +11,7 @@ int main() {
     Identifiable* two = new Identifiable(*one);
     Identifiable* three = new Identifiable("Tri");
     Identifiable* four = new Identifiable("Cheto");
-    *two = *three;
+    *two = *four;
     
     std::cout << "Class  # = " << Identifiable::lastID << std::endl;
     std::cout << "Object 1: name = " << one->getName() << "; # = " << one->getID() << std::endl;

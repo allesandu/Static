@@ -9,7 +9,9 @@ class Identifiable {
     public:
         static int lastID;
         
-        Identifiable(const std::string name = "noOne");
+        Identifiable(const std::string& name = "noOne");
+        ~Identifiable();
+        
         Identifiable(const Identifiable& copy);
         
         int getID() const;
