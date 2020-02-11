@@ -7,8 +7,12 @@ class Countable {
         
     public:
         Countable();
-        static int checkAmount();
         ~Countable();
+        
+        Countable(const Countable& copy);
+        Countable& operator=(const Countable& copy);
+        
+        static int getAmount();
 };
 
 #endif // COUNTABLE_H
